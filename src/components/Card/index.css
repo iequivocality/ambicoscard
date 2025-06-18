@@ -2,9 +2,13 @@
   --card-width: 400px;
   --card-aspect: 0.63044871794;
   --card-radius: 20px;
-  --hyp: -1;
+  --hyp: -0.97;
   /* --effect: url(https://res.cloudinary.com/simey/image/upload/Dev/PokemonCards/illusion.webp); */
   --effect: url('./geometric.png');
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .card {
@@ -21,10 +25,6 @@
   --card-scale: 1;
   --translate-x: 0px;
   --translate-y: 0px;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .card {

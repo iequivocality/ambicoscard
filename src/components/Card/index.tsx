@@ -1,26 +1,29 @@
 import { motion, useSpring, useTransform } from "motion/react";
-import "./index.css";
 import {
+  useEffect,
   useState,
   type CSSProperties,
   type MouseEvent,
-  // type TouchEvent,
+  type TouchEvent,
 } from "react";
 import { adjust, clamp, round } from "../../lib/Math";
 
-const springInteractSettings = { stiffness: 69, damping: 9 };
+import "./index.css";
 
 export function Card() {
   const [interacting, setInteracting] = useState(false);
-  const springGlareX = useSpring(50, springInteractSettings);
-  const springGlareY = useSpring(50, springInteractSettings);
-  const springGlareOpacity = useSpring(0, springInteractSettings);
+  const [flipped, setFlipped] = useState(false);
+  const springGlareX = useSpring(50);
+  const springGlareY = useSpring(50);
+  const springGlareOpacity = useSpring(0.2);
 
-  const springRotateX = useSpring(0, springInteractSettings);
-  const springRotateY = useSpring(0, springInteractSettings);
+  const springRotateX = useSpring(0);
+  const springRotateY = useSpring(0);
 
-  const springBackgroundX = useSpring(50, springInteractSettings);
-  const springBackgroundY = useSpring(50, springInteractSettings);
+  const springRotateDX = useSpring(0);
+
+  const springBackgroundX = useSpring(50);
+  const springBackgroundY = useSpring(50);
 
   const updateSprings = (
     background: { x: number; y: number },
@@ -70,63 +73,56 @@ export function Card() {
     );
   };
 
-  // const interactTouchMove = (e: TouchEvent) => {
-  //   const target = e.target as HTMLButtonElement;
-  //   const rect = target.getBoundingClientRect();
-  //   const absolute = {
-  //     x: e.touches[0].clientX - rect.left, // get mouse position from left
-  //     y: e.touches[0].clientY - rect.top, // get mouse position from right
-  //   };
+  const interactTouchMove = (e: TouchEvent) => {
+    const target = e.target as HTMLButtonElement;
+    const rect = target.getBoundingClientRect();
+    const absolute = {
+      x: e.touches[0].clientX - rect.left, // get mouse position from left
+      y: e.touches[0].clientY - rect.top, // get mouse position from right
+    };
 
-  //   const percent = {
-  //     x: clamp(round((100 / rect.width) * absolute.x)),
-  //     y: clamp(round((100 / rect.height) * absolute.y)),
-  //   };
+    const percent = {
+      x: clamp(round((100 / rect.width) * absolute.x)),
+      y: clamp(round((100 / rect.height) * absolute.y)),
+    };
 
-  //   const center = {
-  //     x: percent.x - 50,
-  //     y: percent.y - 50,
-  //   };
+    const center = {
+      x: percent.x - 50,
+      y: percent.y - 50,
+    };
 
-  //   updateSprings(
-  //     {
-  //       x: adjust(percent.x, 0, 100, 37, 63),
-  //       y: adjust(percent.y, 0, 100, 33, 67),
-  //     },
-  //     {
-  //       x: round(-(center.x / 3.5)),
-  //       y: round(center.y / 2),
-  //     },
-  //     { x: round(percent.x), y: round(percent.y), opacity: 1 },
-  //   );
-  // };
+    updateSprings(
+      {
+        x: adjust(percent.x, 0, 100, 37, 63),
+        y: adjust(percent.y, 0, 100, 33, 67),
+      },
+      {
+        x: round(-(center.x / 3.5)),
+        y: round(center.y / 2),
+      },
+      { x: round(percent.x), y: round(percent.y), opacity: 1 },
+    );
+  };
 
   const interactEnd = () => {
-    if (!interacting) {
-      // springRotateX.jump(0);
-      // springRotateY.jump(0);
-
-      // springGlareX.jump(50);
-      // springGlareY.jump(50);
-      // springGlareOpacity.jump(0);
-
-      // springBackgroundX.jump(50);
-      // springBackgroundY.jump(50);
-      return;
-    }
-
     setInteracting(false);
 
-    springRotateX.jump(0);
-    springRotateY.jump(0);
+    setTimeout(() => {
+      springRotateX.set(0);
+      springRotateY.set(0);
 
-    springGlareX.jump(50);
-    springGlareY.jump(50);
-    springGlareOpacity.jump(0);
+      springGlareX.set(50);
+      springGlareY.set(50);
+      springGlareOpacity.set(0.2);
 
-    springBackgroundX.jump(50);
-    springBackgroundY.jump(50);
+      springBackgroundX.set(50);
+      springBackgroundY.set(50);
+    }, 500);
   };
+
+  useEffect(() => {
+    springRotateDX.set(flipped ? 180 : 0);
+  }, [flipped]);
 
   const pointerFromCenter = useTransform(() =>
     clamp(
@@ -138,14 +134,15 @@ export function Card() {
       1,
     ),
   );
+
+  const springGlareXPer = useTransform(() => `${springGlareX.get()}%`);
+  const springGlareYPer = useTransform(() => `${springGlareY.get()}%`);
   const pointerFromTop = useTransform(() => springGlareY.get() / 100);
   const pointerFromLeft = useTransform(() => springGlareX.get() / 100);
-  const rotateX = useTransform(() => `${springRotateX.get()}deg`);
+  const rotateX = useTransform(() => `${springRotateX.get() + springRotateDX.get()}deg`);
   const rotateY = useTransform(() => `${springRotateY.get()}deg`);
   const backgroundX = useTransform(() => `${springBackgroundX.get()}%`);
   const backgroundY = useTransform(() => `${springBackgroundY.get()}%`);
-  const springGlareXPer = useTransform(() => `${springGlareX.get()}%`);
-  const springGlareYPer = useTransform(() => `${springGlareY.get()}%`);
 
   return (
     <motion.div
@@ -164,15 +161,25 @@ export function Card() {
           "--background-y": backgroundY,
         } as CSSProperties
       }
+      transition={interacting ? { stiffness: 69, damping: 9 } : { stiffness: 6, damping: 1 }}
     >
       <div className="card-translator">
         <button
           className="card-rotator"
+          onClick={() => setFlipped(!flipped)}
           onMouseMove={interact}
           onMouseOut={interactEnd}
+          onTouchEnd={interactEnd}
+          onTouchMove={interactTouchMove}
         >
           <div className="card-back">
             <img src="/coscard_back.jpg" />
+            {flipped && (
+              <>
+                <div className="card-shine"></div>
+                <div className="card-glare"></div>
+              </>
+            )}
           </div>
           <div className="card-front">
             <img src="/coscard_front.jpg" />
