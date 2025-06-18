@@ -1,6 +1,22 @@
 body {
-  background-color: black;
   padding: 0;
+  background-color: #2d3436;
+  /* background-image: linear-gradient(
+    -20deg,
+    hsl(209deg 77% 24%) 0%,
+    hsl(209deg 78% 23%) 15%,
+    hsl(209deg 78% 21%) 20%,
+    hsl(209deg 79% 20%) 24%,
+    hsl(209deg 79% 18%) 27%,
+    hsl(209deg 80% 17%) 31%,
+    hsl(209deg 80% 16%) 35%,
+    hsl(215deg 60% 15%) 41%,
+    hsl(221deg 48% 14%) 47%,
+    hsl(229deg 39% 12%) 56%,
+    hsl(241deg 32% 10%) 66%,
+    hsl(257deg 47% 7%) 80%,
+    hsl(263deg 100% 3%) 100%
+  ); */
 }
 
 main {

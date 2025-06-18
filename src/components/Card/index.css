@@ -5,6 +5,13 @@
   --hyp: -0.97;
   /* --effect: url(https://res.cloudinary.com/simey/image/upload/Dev/PokemonCards/illusion.webp); */
   --effect: url('./geometric.png');
+  --card-back-bg: hsl(208, 22%, 17%);
+}
+
+@media (width < 48rem) {
+  :root {
+    --card-width: 288px;
+  }
 }
 
 * {
@@ -94,7 +101,7 @@
 }
 
 .card-back {
-  background-color: white;
+  background-color: var(--card-back-bg);
   -webkit-transform: rotateY(180deg) translateZ(1px);
   webkit-transform: rotateY(180deg) translateZ(1px);
   backface-visibility: visible;

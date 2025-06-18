@@ -15,7 +15,7 @@ export function Card() {
   const [flipped, setFlipped] = useState(false);
   const springGlareX = useSpring(50);
   const springGlareY = useSpring(50);
-  const springGlareOpacity = useSpring(0.2);
+  const springGlareOpacity = useSpring(0.25);
 
   const springRotateX = useSpring(0);
   const springRotateY = useSpring(0);
@@ -43,6 +43,7 @@ export function Card() {
   };
 
   const interact = (e: MouseEvent<HTMLButtonElement>) => {
+    setInteracting(true);
     const target = e.target as HTMLButtonElement;
     const rect = target.getBoundingClientRect();
     const absolute = {
@@ -74,6 +75,7 @@ export function Card() {
   };
 
   const interactTouchMove = (e: TouchEvent) => {
+    setInteracting(true);
     const target = e.target as HTMLButtonElement;
     const rect = target.getBoundingClientRect();
     const absolute = {
@@ -102,6 +104,8 @@ export function Card() {
       },
       { x: round(percent.x), y: round(percent.y), opacity: 1 },
     );
+
+    e.preventDefault();
   };
 
   const interactEnd = () => {
@@ -113,7 +117,7 @@ export function Card() {
 
       springGlareX.set(50);
       springGlareY.set(50);
-      springGlareOpacity.set(0.2);
+      springGlareOpacity.set(0.25);
 
       springBackgroundX.set(50);
       springBackgroundY.set(50);
