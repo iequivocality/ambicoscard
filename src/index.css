@@ -1,6 +1,9 @@
 body {
   padding: 0;
+  margin: 0;
   background-color: #2d3436;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
   /* background-image: linear-gradient(
     -20deg,
     hsl(209deg 77% 24%) 0%,

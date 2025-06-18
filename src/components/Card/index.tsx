@@ -75,6 +75,7 @@ export function Card() {
   };
 
   const interactTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
     setInteracting(true);
     const target = e.target as HTMLButtonElement;
     const rect = target.getBoundingClientRect();
@@ -104,8 +105,6 @@ export function Card() {
       },
       { x: round(percent.x), y: round(percent.y), opacity: 1 },
     );
-
-    e.preventDefault();
   };
 
   const interactEnd = () => {
