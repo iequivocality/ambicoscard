@@ -8,7 +8,7 @@ import {
 } from "react";
 import { adjust, clamp, round } from "../../lib/Math";
 
-const springInteractSettings = { stiffness: 66, damping: 5 };
+const springInteractSettings = { stiffness: 69, damping: 9 };
 
 export function Card() {
   const [interacting, setInteracting] = useState(false);
