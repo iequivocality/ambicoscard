@@ -49,6 +49,17 @@
   outline: 1px solid transparent;
 }
 
+.card .card__translater,
+.card .card__rotator,
+.card .card__shine,
+.card .card__glare {
+
+  /* if this card is not in a framework, we can add simply
+    hover effects when it's not "interactive" */
+  transition: all 0.3s ease;
+
+}
+
 .card,
 .card-rotator {
   width: var(--card-width);
@@ -250,4 +261,13 @@
   );
   opacity: var(--card-opacity);
   mix-blend-mode: overlay;
+}
+
+.card.loading .card-front {
+  opacity: 0;
+}
+
+.card.loading .card-back {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }

@@ -11,6 +11,7 @@ import { adjust, clamp, round } from "../../lib/Math";
 import "./index.css";
 
 export function Card() {
+  const [loading, setLoading] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const [flipped, setFlipped] = useState(false);
   const springGlareX = useSpring(50);
@@ -39,7 +40,6 @@ export function Card() {
     springGlareX.set(glare.x);
     springGlareY.set(glare.y);
     springGlareOpacity.set(glare.opacity);
-    console.log(glare.opacity);
   };
 
   const interact = (e: MouseEvent<HTMLButtonElement>) => {
@@ -76,6 +76,7 @@ export function Card() {
 
   const interactTouchMove = (e: TouchEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setInteracting(true);
     const target = e.target as HTMLButtonElement;
     const rect = target.getBoundingClientRect();
@@ -149,7 +150,7 @@ export function Card() {
 
   return (
     <motion.div
-      className="card"
+      className={["card", loading ? "loading" : ""].join(" ")}
       style={
         {
           "--pointer-x": springGlareXPer,
@@ -176,7 +177,7 @@ export function Card() {
           onTouchMove={interactTouchMove}
         >
           <div className="card-back">
-            <img src="/coscard_back.jpg" />
+            <img src="/coscard_back.jpg" loading="lazy" />
             {flipped && (
               <>
                 <div className="card-shine"></div>
@@ -185,7 +186,9 @@ export function Card() {
             )}
           </div>
           <div className="card-front">
-            <img src="/coscard_front.jpg" />
+            <img src="/coscard_front.jpg" loading="lazy" onLoad={() => {
+              setLoading(false);
+            }}/>
             <div className="card-shine"></div>
             <div className="card-glare"></div>
           </div>
