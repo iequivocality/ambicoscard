@@ -4,7 +4,7 @@ import {
   useState,
   type CSSProperties,
   type MouseEvent,
-  type TouchEvent,
+  // type TouchEvent,
 } from "react";
 import { adjust, clamp, round } from "../../lib/Math";
 
@@ -101,7 +101,7 @@ export function Card() {
   //   );
   // };
 
-  const interactEnd = (e: MouseEvent) => {
+  const interactEnd = () => {
     if (!interacting) {
       // springRotateX.jump(0);
       // springRotateY.jump(0);
