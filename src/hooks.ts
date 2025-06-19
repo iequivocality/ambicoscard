@@ -18,34 +18,40 @@ function getRawOrientation(event?: DeviceOrientationEvent) {
 
 type Orientation = ReturnType<typeof getRawOrientation>;
 
-type OrientationData = { absolute: Orientation, relative: Orientation };
+type OrientationData = { absolute: Orientation; relative: Orientation };
 
-const getOrientationObject = (e?: DeviceOrientationEvent, baseOrientation: Orientation = getRawOrientation()) => {
+const getOrientationObject = (
+  e?: DeviceOrientationEvent,
+  baseOrientation: Orientation = getRawOrientation(),
+) => {
   const orientation = getRawOrientation(e);
   return {
     absolute: orientation,
-    relative: { 
-      alpha: orientation.alpha - baseOrientation.alpha, 
-      beta: orientation.beta - baseOrientation.beta, 
-      gamma: orientation.gamma - baseOrientation.gamma, 
-    }
-  }
-}
+    relative: {
+      alpha: orientation.alpha - baseOrientation.alpha,
+      beta: orientation.beta - baseOrientation.beta,
+      gamma: orientation.gamma - baseOrientation.gamma,
+    },
+  };
+};
 
 export function useOrientation() {
-  const [ firstRead, setFirstRead ] = useState(true);
-  const [ orientation, setOrientation ] = useState<OrientationData>(getOrientationObject());
-  const [ baseOrientation, setBaseOrientation ] = useState<Orientation>(getRawOrientation());
+  const [firstRead, setFirstRead] = useState(true);
+  const [orientation, setOrientation] = useState<OrientationData>(
+    getOrientationObject(),
+  );
+  const [baseOrientation, setBaseOrientation] = useState<Orientation>(
+    getRawOrientation(),
+  );
 
   useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
-
       if (firstRead) {
         setFirstRead(false);
         setBaseOrientation(getRawOrientation(event));
       }
 
-      const bo = firstRead ? getRawOrientation(event): baseOrientation;
+      const bo = firstRead ? getRawOrientation(event) : baseOrientation;
       setOrientation(getOrientationObject(event, bo));
     };
 
@@ -53,16 +59,16 @@ export function useOrientation() {
 
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
-    }
+    };
   }, []);
 
   const resetBaseOrientation = () => {
     setFirstRead(true);
     setBaseOrientation(getRawOrientation());
-  }
+  };
 
   return {
     orientation,
-    resetBaseOrientation
-  }
+    resetBaseOrientation,
+  };
 }

@@ -4,7 +4,7 @@
   --card-radius: 20px;
   --hyp: -0.97;
   /* --effect: url(https://res.cloudinary.com/simey/image/upload/Dev/PokemonCards/illusion.webp); */
-  --effect: url('./geometric.png');
+  --effect: url("./geometric.png");
   --card-back-bg: hsl(208, 22%, 17%);
 }
 
@@ -53,11 +53,9 @@
 .card .card__rotator,
 .card .card__shine,
 .card .card__glare {
-
   /* if this card is not in a framework, we can add simply
     hover effects when it's not "interactive" */
   transition: all 0.3s ease;
-
 }
 
 .card,

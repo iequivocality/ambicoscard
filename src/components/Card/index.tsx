@@ -143,7 +143,9 @@ export function Card() {
   const springGlareYPer = useTransform(() => `${springGlareY.get()}%`);
   const pointerFromTop = useTransform(() => springGlareY.get() / 100);
   const pointerFromLeft = useTransform(() => springGlareX.get() / 100);
-  const rotateX = useTransform(() => `${springRotateX.get() + springRotateDX.get()}deg`);
+  const rotateX = useTransform(
+    () => `${springRotateX.get() + springRotateDX.get()}deg`,
+  );
   const rotateY = useTransform(() => `${springRotateY.get()}deg`);
   const backgroundX = useTransform(() => `${springBackgroundX.get()}%`);
   const backgroundY = useTransform(() => `${springBackgroundY.get()}%`);
@@ -165,7 +167,11 @@ export function Card() {
           "--background-y": backgroundY,
         } as CSSProperties
       }
-      transition={interacting ? { stiffness: 69, damping: 9 } : { stiffness: 6, damping: 1 }}
+      transition={
+        interacting
+          ? { stiffness: 69, damping: 9 }
+          : { stiffness: 6, damping: 1 }
+      }
     >
       <div className="card-translator">
         <button
@@ -177,7 +183,13 @@ export function Card() {
           onTouchMove={interactTouchMove}
         >
           <div className="card-back">
-            <img src="/coscard_back.jpg" loading="lazy" />
+            <img
+              src="/back/coscard_back_800.jpg"
+              srcSet="/back/coscard_back_288.jpg 288w, /back/coscard_back_400.jpg 400w"
+              sizes="(max-width: 48rem) 288px,
+         400px"
+              loading="lazy"
+            />
             {flipped && (
               <>
                 <div className="card-shine"></div>
@@ -186,9 +198,15 @@ export function Card() {
             )}
           </div>
           <div className="card-front">
-            <img src="/coscard_front.jpg" loading="lazy" onLoad={() => {
-              setLoading(false);
-            }}/>
+            <img
+              src="/front/coscard_front_800.jpg"
+              srcSet="/front/coscard_front_288.jpg 288w, /front/coscard_front_400.jpg 400w"
+              sizes="(max-width: 48rem) 288px, 400px"
+              loading="lazy"
+              onLoad={() => {
+                setLoading(false);
+              }}
+            />
             <div className="card-shine"></div>
             <div className="card-glare"></div>
           </div>

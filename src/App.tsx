@@ -6,8 +6,8 @@ function App() {
   return (
     <main>
       <Card />
-      { /** FIND A CSS WAY TO EXECUTE THIS */}
-      <Canvas style={{ position: "fixed"}}>
+      {/** FIND A CSS WAY TO EXECUTE THIS */}
+      <Canvas style={{ position: "fixed" }}>
         <Grid
           position={[0, -0.01, 0]}
           rotation={[0.1744, 0, 0]}
@@ -15,7 +15,7 @@ function App() {
           infiniteGrid
           fadeDistance={7}
           fadeStrength={1}
-          cellColor={0xFFFFFF}
+          cellColor={0xffffff}
           followCamera={false}
         />
       </Canvas>
