@@ -22,9 +22,20 @@ body {
   ); */
 }
 
+.grid-background {
+  position: fixed !important;
+  bottom: 0;
+}
+
 main {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100dvh;
+}
+
+.card-container {
+  perspective: 1000px;
+  display: flex;
+  gap: 4rem;
 }

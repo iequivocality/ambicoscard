@@ -11,8 +11,7 @@ import type { CardEntity } from "../../data";
 
 import "./index.css";
 
-
-export function Card({ card }: { card: CardEntity }) {
+export function Card({ card, index }: { card: CardEntity, index: number }) {
   const [loading, setLoading] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -123,7 +122,7 @@ export function Card({ card }: { card: CardEntity }) {
 
       springBackgroundX.set(50);
       springBackgroundY.set(50);
-    }, 500);
+    }, 350);
   };
 
   useEffect(() => {
@@ -154,9 +153,13 @@ export function Card({ card }: { card: CardEntity }) {
 
   return (
     <motion.div
-      className={["card", loading ? "loading" : ""].join(" ")}
+      className={["card active", card.key, loading ? "loading" : ""]
+        .join(" ")
+        .trim()}
+      data-name={card.name}
       style={
         {
+          "--card-index": index,
           "--pointer-x": springGlareXPer,
           "--pointer-y": springGlareYPer,
           "--pointer-from-center": pointerFromCenter,
@@ -184,11 +187,11 @@ export function Card({ card }: { card: CardEntity }) {
           onTouchEnd={interactEnd}
           onTouchMove={interactTouchMove}
         >
-          <div className="card-back">
-            <img
-              {...card.back.main}
-              loading="lazy"
-            />
+          <div
+            className="card-back"
+            style={{ "--foil": card.back.foil } as CSSProperties}
+          >
+            <img {...card.back.main} loading="lazy" />
             {flipped && (
               <>
                 <div className="card-shine"></div>
@@ -196,7 +199,10 @@ export function Card({ card }: { card: CardEntity }) {
               </>
             )}
           </div>
-          <div className="card-front">
+          <div
+            className="card-front"
+            style={{ "--foil": card.front.foil } as CSSProperties}
+          >
             <img
               {...card.front.main}
               loading="lazy"

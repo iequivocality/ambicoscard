@@ -2,13 +2,12 @@ import { Canvas } from "@react-three/fiber";
 import { Card } from "./components/card";
 import { Grid } from "@react-three/drei";
 import { CARDS } from "./data";
+import type { CSSProperties } from "react";
 
 function App() {
   return (
-    <main>
-      <Card card={CARDS["AMELIA"]} />
-      {/** FIND A CSS WAY TO EXECUTE THIS */}
-      <Canvas style={{ position: "fixed" }}>
+    <>
+      <Canvas className="grid-background">
         <Grid
           position={[0, -0.01, 0]}
           rotation={[0.1744, 0, 0]}
@@ -20,7 +19,16 @@ function App() {
           followCamera={false}
         />
       </Canvas>
-    </main>
+      <main>
+        <div className="card-container" style={{
+          "--card-count": Object.keys(CARDS).length
+        } as CSSProperties}>
+          {Object.keys(CARDS).map((key, index) => {
+            return <Card key={key} index={index} card={CARDS[key]} />;
+          })}
+        </div>
+      </main>
+    </>
   );
 }
 

@@ -1,31 +1,63 @@
 import type { ImgHTMLAttributes } from "react";
 
 export type CardEntity = {
+  name: string;
+  key: string;
   front: {
     main: Pick<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "sizes">;
-  },
+    foil?: string;
+  };
   back: {
     main: Pick<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "sizes">;
-  }
-}
+    foil?: string;
+  };
+};
 
 export type CardSet = Record<string, CardEntity>;
 
 export const CARDS: CardSet = {
-  AMELIA: {
+  amelia: {
+    name: "Casual Amelia Watson",
+    key: "amelia",
     front: {
       main: {
-        src: "/front/coscard_front_800.jpg",
-        srcSet: "/front/coscard_front_288.jpg 288w, /front/coscard_front_400.jpg 400w",
-        sizes: "(max-width: 48rem) 288px, 400px"
+        src: "/amelia/front/coscard_front_800.jpg",
+        srcSet:
+          "/amelia/front/coscard_front_288.jpg 288w, /amelia/front/coscard_front_400.jpg 400w",
+        sizes: "(max-width: 48rem) 288px, 400px",
       },
+      foil: 'url("./geometric.png")',
     },
     back: {
       main: {
-        src: "/back/coscard_back_800.jpg",
-        srcSet: "/back/coscard_back_288.jpg 288w, /back/coscard_back_400.jpg 400w",
-        sizes: "(max-width: 48rem) 288px, 400px"
-      }
-    }
-  }
-}
+        src: "/amelia/back/coscard_back_800.jpg",
+        srcSet:
+          "/amelia/back/coscard_back_288.jpg 288w, /amelia/back/coscard_back_400.jpg 400w",
+        sizes: "(max-width: 48rem) 288px, 400px",
+      },
+      foil: 'url("./geometric.png")',
+    },
+  },
+  ganyu: {
+    name: "City Pop Ganyu",
+    key: "ganyu",
+    front: {
+      main: {
+        src: "/ganyu/front/coscard_front_800.jpg",
+        srcSet:
+          "/ganyu/front/coscard_front_288.jpg 288w, /ganyu/front/coscard_front_400.jpg 400w",
+        sizes: "(max-width: 48rem) 288px, 400px",
+      },
+      foil: 'url("./galaxy.jpg")',
+    },
+    back: {
+      main: {
+        src: "/ganyu/back/coscard_back_800.jpg",
+        srcSet:
+          "/ganyu/back/coscard_back_288.jpg 288w, /ganyu/back/coscard_back_400.jpg 400w",
+        sizes: "(max-width: 48rem) 288px, 400px",
+      },
+      foil: 'url("./galaxy.jpg")',
+    },
+  },
+};
