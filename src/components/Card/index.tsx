@@ -7,10 +7,12 @@ import {
   type TouchEvent,
 } from "react";
 import { adjust, clamp, round } from "../../lib/Math";
+import type { CardEntity } from "../../data";
 
 import "./index.css";
 
-export function Card() {
+
+export function Card({ card }: { card: CardEntity }) {
   const [loading, setLoading] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -184,10 +186,7 @@ export function Card() {
         >
           <div className="card-back">
             <img
-              src="/back/coscard_back_800.jpg"
-              srcSet="/back/coscard_back_288.jpg 288w, /back/coscard_back_400.jpg 400w"
-              sizes="(max-width: 48rem) 288px,
-         400px"
+              {...card.back.main}
               loading="lazy"
             />
             {flipped && (
@@ -199,9 +198,7 @@ export function Card() {
           </div>
           <div className="card-front">
             <img
-              src="/front/coscard_front_800.jpg"
-              srcSet="/front/coscard_front_288.jpg 288w, /front/coscard_front_400.jpg 400w"
-              sizes="(max-width: 48rem) 288px, 400px"
+              {...card.front.main}
               loading="lazy"
               onLoad={() => {
                 setLoading(false);

@@ -1,11 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { Card } from "./components/Card";
+import { Card } from "./components/card";
 import { Grid } from "@react-three/drei";
+import { CARDS } from "./data";
 
 function App() {
   return (
     <main>
-      <Card />
+      <Card card={CARDS["AMELIA"]} />
       {/** FIND A CSS WAY TO EXECUTE THIS */}
       <Canvas style={{ position: "fixed" }}>
         <Grid
