@@ -6,7 +6,6 @@ import { useState, type CSSProperties } from "react";
 import { AnimatePresence } from "motion/react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
-  ChevronLeft,
   ChevronLeftIcon,
   ChevronRightIcon,
   Link,
