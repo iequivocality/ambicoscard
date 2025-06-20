@@ -37,7 +37,7 @@
 .card {
   -webkit-transform: translate3d(0px, 0px, -100px);
   transform: translate3d(0px, 0px, -100px);
-  /* transform: translate3d(calc(sin(calc(var(--card-index) / var(--card-count) * 6.28rad)) * 100px), 0px, calc(cos(calc(var(--card-index) / var(--card-count) * 6.28rad)) * 100px)); */
+  /* transform: translate3d(calc(var(--card-index) * 200px - 40px), 150px, -100px) rotateZ(calc(var(--card-index) / var(--card-count) * 80deg - 20deg)) translate3d(calc(var(--card-index) * 200px - 40px), -150px, -100px); */
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   pointer-events: none;
