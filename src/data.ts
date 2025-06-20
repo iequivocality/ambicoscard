@@ -11,6 +11,7 @@ export type CardEntity = {
     main: Pick<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "sizes">;
     foil?: string;
   };
+  preview: string;
 };
 
 export type CardSet = Record<string, CardEntity>;
@@ -37,6 +38,7 @@ export const CARDS: CardSet = {
       },
       foil: 'url("./geometric.png")',
     },
+    preview: "/amelia/preview.jpg",
   },
   ganyu: {
     name: "City Pop Ganyu",
@@ -59,5 +61,6 @@ export const CARDS: CardSet = {
       },
       foil: 'url("./galaxy.jpg")',
     },
+    preview: "/ganyu/preview.jpg",
   },
 };

@@ -1,4 +1,4 @@
-import { motion, useSpring, useTransform } from "motion/react";
+import { motion, useIsPresent, useSpring, useTransform } from "motion/react";
 import {
   useEffect,
   useState,
@@ -11,7 +11,8 @@ import type { CardEntity } from "../../data";
 
 import "./index.css";
 
-export function Card({ card, index }: { card: CardEntity, index: number }) {
+export function Card({ card, index }: { card: CardEntity; index: number }) {
+  const isPresent = useIsPresent();
   const [loading, setLoading] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -126,6 +127,10 @@ export function Card({ card, index }: { card: CardEntity, index: number }) {
   };
 
   useEffect(() => {
+    console.log(card.name);
+  });
+
+  useEffect(() => {
     springRotateDX.set(flipped ? 180 : 0);
   }, [flipped]);
 
@@ -173,10 +178,13 @@ export function Card({ card, index }: { card: CardEntity, index: number }) {
         } as CSSProperties
       }
       transition={
-        interacting
+        interacting || !isPresent
           ? { stiffness: 69, damping: 9 }
           : { stiffness: 6, damping: 1 }
       }
+      initial={{ rotateY: -180, opacity: 0 }}
+      animate={{ rotateY: 0, opacity: 1 }}
+      exit={{ rotateY: 180, opacity: 0 }}
     >
       <div className="card-translator">
         <button

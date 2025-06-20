@@ -13,8 +13,10 @@
     "biome:imports": "biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./src"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.1.0",
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
+    "lucide-react": "^0.518.0",
     "motion": "^12.18.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
