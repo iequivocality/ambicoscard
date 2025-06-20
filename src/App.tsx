@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Card } from "./components/card";
+import { Card } from "./components/Card";
 import { Grid } from "@react-three/drei";
 import { CARDS } from "./data";
 import type { CSSProperties } from "react";
