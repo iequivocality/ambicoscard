@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Card } from "./components/Card";
 import { Grid } from "@react-three/drei";
 import { CARDS } from "./data";
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { AnimatePresence } from "motion/react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
@@ -22,6 +22,12 @@ function App() {
     setCard(card === "amelia" ? "ganyu" : "amelia");
   };
 
+  useEffect(() => {
+    document.body.style.setProperty("--background-color", CARDS[card].backgroundColor);
+    document.body.style.setProperty("--headsup-color", CARDS[card].sectionColor);
+  }, [card]);
+  
+
   return (
     <>
       <Canvas className="grid-background">
@@ -32,8 +38,8 @@ function App() {
           infiniteGrid
           fadeDistance={7}
           fadeStrength={1}
-          sectionColor={0xffb997}
-          cellColor={0xf67e7d}
+          sectionColor={CARDS[card].sectionColor}
+          cellColor={CARDS[card].cellColor}
           followCamera={false}
         />
       </Canvas>

@@ -74,12 +74,18 @@ button {
   appearance: none;
 }
 
+:root {
+  --background-color: hsl(319, 16%, 39%);
+  --headsup-color: hsl(20, 100%, 80%);
+}
+
 body {
   padding: 0;
   margin: 0;
-  background-color: hsl(319, 16%, 39%);
+  background-color: var(--background-color);
   font-family: "Poppins", sans-serif;
   font-style: normal;
+  transition: background-color 0.5s ease;
 }
 
 .grid-background {
@@ -112,7 +118,6 @@ main {
     aspect-ratio: 1;
     border-radius: 50%;
     overflow: hidden;
-    outline: 3px solid white;
     -webkit-transition-timing-function: cubic-bezier(0.47, 0.0, 0.745, 0.715);
     -moz-transition-timing-function: cubic-bezier(0.47, 0.0, 0.745, 0.715);
     -o-transition-timing-function: cubic-bezier(0.47, 0.0, 0.745, 0.715);
@@ -122,6 +127,10 @@ main {
     -moz-transition: all 200ms cubic-bezier(0.47, 0.0, 0.745, 0.715);
     -o-transition: all 200ms cubic-bezier(0.47, 0.0, 0.745, 0.715);
     transition: all 200ms cubic-bezier(0.47, 0.0, 0.745, 0.715);
+  }
+
+  button.selected {
+    outline: 3px solid white;
   }
 
   button:hover {
@@ -154,7 +163,7 @@ main {
 .heads-up {
   position: absolute;
   top: 0;
-  color: hsl(20, 100%, 80%);
+  color: var(--headsup-color);
   font-size: 1rem;
   z-index: 20;
 

@@ -12,6 +12,9 @@ export type CardEntity = {
     foil?: string;
   };
   preview: string;
+  cellColor: string;
+  sectionColor: string;
+  backgroundColor: string;
 };
 
 export type CardSet = Record<string, CardEntity>;
@@ -39,6 +42,9 @@ export const CARDS: CardSet = {
       foil: 'url("./geometric.png")',
     },
     preview: "/amelia/preview.jpg",
+    cellColor: "#f67e7d",
+    sectionColor: "#ffb997",
+    backgroundColor: "hsl(319, 16%, 39%)"
   },
   ganyu: {
     name: "City Pop Ganyu",
@@ -62,5 +68,8 @@ export const CARDS: CardSet = {
       foil: 'url("./galaxy.jpg")',
     },
     preview: "/ganyu/preview.jpg",
+    cellColor: "#E8EEF2",
+    sectionColor: "#37393A",
+    backgroundColor: "hsl(207, 24%, 82%)"
   },
 };
