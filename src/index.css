@@ -158,6 +158,13 @@ main {
 
 .card-carousel {
   display: grid;
+
+  .card-name {
+    color: var(--headsup-color);
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 2rem 0 0.5rem 0;
+  }
 }
 
 .heads-up {
@@ -176,6 +183,10 @@ main {
     display: inline-block;
     position: absolute;
     inset: 0;
+  }
+
+  h1 {
+    font-size: 1.5rem;
   }
 
   .doobly-doo {

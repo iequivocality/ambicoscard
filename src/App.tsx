@@ -70,6 +70,7 @@ function App() {
             <ChevronLeftIcon />
           </button>
           <div className="card-carousel">
+            <h2 className="card-name">{CARDS[card].name}</h2>
             <AnimatePresence>
               <Card key={card} index={0} card={CARDS[card]} />
             </AnimatePresence>
