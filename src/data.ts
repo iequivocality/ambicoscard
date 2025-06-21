@@ -44,7 +44,7 @@ export const CARDS: CardSet = {
     preview: "/amelia/preview.jpg",
     cellColor: "#f67e7d",
     sectionColor: "#ffb997",
-    backgroundColor: "hsl(319, 16%, 39%)"
+    backgroundColor: "hsl(319, 16%, 39%)",
   },
   ganyu: {
     name: "City Pop Ganyu",
@@ -70,6 +70,6 @@ export const CARDS: CardSet = {
     preview: "/ganyu/preview.jpg",
     cellColor: "#E8EEF2",
     sectionColor: "#37393A",
-    backgroundColor: "hsl(207, 24%, 82%)"
+    backgroundColor: "hsl(207, 24%, 82%)",
   },
 };

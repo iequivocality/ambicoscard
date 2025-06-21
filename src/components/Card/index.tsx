@@ -158,9 +158,7 @@ export function Card({ card, index }: { card: CardEntity; index: number }) {
 
   return (
     <motion.div
-      className={["card", card.key, loading ? "loading" : ""]
-        .join(" ")
-        .trim()}
+      className={["card", card.key, loading ? "loading" : ""].join(" ").trim()}
       data-name={card.name}
       style={
         {

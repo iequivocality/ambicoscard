@@ -5,11 +5,7 @@ import { CARDS } from "./data";
 import { useEffect, useState, type CSSProperties } from "react";
 import { AnimatePresence } from "motion/react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  Link,
-} from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, Link } from "lucide-react";
 
 function App() {
   const [card, setCard] = useState("amelia");
@@ -23,10 +19,15 @@ function App() {
   };
 
   useEffect(() => {
-    document.body.style.setProperty("--background-color", CARDS[card].backgroundColor);
-    document.body.style.setProperty("--headsup-color", CARDS[card].sectionColor);
+    document.body.style.setProperty(
+      "--background-color",
+      CARDS[card].backgroundColor,
+    );
+    document.body.style.setProperty(
+      "--headsup-color",
+      CARDS[card].sectionColor,
+    );
   }, [card]);
-  
 
   return (
     <>
