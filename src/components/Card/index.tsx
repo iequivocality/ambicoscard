@@ -10,9 +10,11 @@ import { adjust, clamp, round } from "../../lib/Math";
 import type { CardEntity } from "../../data";
 
 import "./index.css";
+import { useOrientation } from "../../hooks";
 
 export function Card({ card, index }: { card: CardEntity; index: number }) {
   const isPresent = useIsPresent();
+  const { orientation } = useOrientation();
   const [loading, setLoading] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -127,12 +129,31 @@ export function Card({ card, index }: { card: CardEntity; index: number }) {
   };
 
   useEffect(() => {
-    console.log(card.name);
-  });
-
-  useEffect(() => {
     springRotateDX.set(flipped ? 180 : 0);
   }, [flipped]);
+
+  useEffect(() => {
+    const x = orientation.relative.gamma;
+    const y = orientation.relative.beta;
+    const limit = { x: 16, y: 18 };
+
+    const degrees = { 
+      x: clamp(x, -limit.x, limit.x), 
+      y: clamp(y, -limit.y, limit.y) 
+    };
+
+    updateSprings({
+      x: adjust(degrees.x, -limit.x, limit.x, 37, 63),
+      y: adjust(degrees.y, -limit.y, limit.y, 33, 67),
+    },{
+      x: round(degrees.x * -1),
+      y: round(degrees.y),
+    },{
+      x: adjust(degrees.x, -limit.x, limit.x, 0, 100),
+      y: adjust(degrees.y, -limit.y, limit.y, 0, 100),
+      opacity: 1,
+    });
+  }, [orientation])
 
   const pointerFromCenter = useTransform(() =>
     clamp(
