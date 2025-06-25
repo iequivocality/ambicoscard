@@ -210,7 +210,10 @@ export function Card({ card, index }: { card: CardEntity; index: number }) {
       <div className="card-translator">
         <button
           className="card-rotator"
-          onClick={() => setFlipped(!flipped)}
+          onClick={() => {
+            setFlipped(!flipped);
+            setInteracting(false);
+          }}
           onMouseMove={interact}
           onMouseOut={interactEnd}
           onTouchEnd={interactEnd}
