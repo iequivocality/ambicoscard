@@ -22,7 +22,6 @@ type OrientationData = { absolute: Orientation; relative: Orientation };
 
 const getOrientationObject = (
   e?: DeviceOrientationEvent,
-  // baseOrientation: Orientation = getRawOrientation(),
 ) => {
   const orientation = getRawOrientation(e);
   return {
@@ -36,22 +35,12 @@ const getOrientationObject = (
 };
 
 export function useOrientation() {
-  // const [firstRead, setFirstRead] = useState(true);
   const [orientation, setOrientation] = useState<OrientationData>(
     getOrientationObject(),
   );
-  // const [baseOrientation, setBaseOrientation] = useState<Orientation>(
-    // getRawOrientation(),
-  // );
 
   useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
-      // if (firstRead) {
-      //   setFirstRead(false);
-      //   setBaseOrientation(getRawOrientation(event));
-      // }
-
-      // const bo = firstRead ? getRawOrientation(event) : baseOrientation;
       setOrientation(getOrientationObject(event));
     };
 

@@ -133,27 +133,29 @@ export function Card({ card, index }: { card: CardEntity; index: number }) {
   }, [flipped]);
 
   useEffect(() => {
-    const x = orientation.relative.gamma;
-    const y = orientation.relative.beta;
-    const limit = { x: 16, y: 18 };
+    if (!interacting) {
+      const x = orientation.relative.gamma;
+      const y = orientation.relative.beta;
+      const limit = { x: 16, y: 18 };
 
-    const degrees = { 
-      x: clamp(x, -limit.x, limit.x), 
-      y: clamp(y, -limit.y, limit.y) 
-    };
+      const degrees = { 
+        x: clamp(x, -limit.x, limit.x), 
+        y: clamp(y, -limit.y, limit.y) 
+      };
 
-    updateSprings({
-      x: adjust(degrees.x, -limit.x, limit.x, 37, 63),
-      y: adjust(degrees.y, -limit.y, limit.y, 33, 67),
-    },{
-      x: round(degrees.x * -1),
-      y: round(degrees.y),
-    },{
-      x: adjust(degrees.x, -limit.x, limit.x, 0, 100),
-      y: adjust(degrees.y, -limit.y, limit.y, 0, 100),
-      opacity: 1,
-    });
-  }, [orientation])
+      updateSprings({
+        x: adjust(degrees.x, -limit.x, limit.x, 37, 63),
+        y: adjust(degrees.y, -limit.y, limit.y, 33, 67),
+      },{
+        x: round(degrees.x * -1),
+        y: round(degrees.y),
+      },{
+        x: adjust(degrees.x, -limit.x, limit.x, 0, 100),
+        y: adjust(degrees.y, -limit.y, limit.y, 0, 100),
+        opacity: 1,
+      });
+    }
+  }, [interacting, orientation])
 
   const pointerFromCenter = useTransform(() =>
     clamp(
