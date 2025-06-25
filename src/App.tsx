@@ -6,9 +6,11 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { AnimatePresence } from "motion/react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { ChevronLeftIcon, ChevronRightIcon, Link } from "lucide-react";
+import { useOrientation } from "./hooks";
 
 function App() {
   const [card, setCard] = useState("amelia");
+  const { orientation } = useOrientation();
 
   const previous = () => {
     setCard(card === "amelia" ? "ganyu" : "amelia");
@@ -117,6 +119,11 @@ function App() {
               <SiGithub />
             </a>
           </div>
+        </div>
+        <div className="debug">
+          <div>Gamma: {orientation.relative.gamma}</div>
+          <div>Beta: {orientation.relative.beta}</div>
+          <div>Alpha {orientation.relative.alpha}</div>
         </div>
       </aside>
     </>

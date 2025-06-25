@@ -28,9 +28,9 @@ const getOrientationObject = (
   return {
     absolute: orientation,
     relative: {
-      alpha: orientation.alpha - baseOrientation.alpha,
-      beta: orientation.beta - baseOrientation.beta,
-      gamma: orientation.gamma - baseOrientation.gamma,
+      alpha: orientation.alpha,
+      beta: orientation.beta,
+      gamma: orientation.gamma,
     },
   };
 };
@@ -46,13 +46,13 @@ export function useOrientation() {
 
   useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
-      if (firstRead) {
-        setFirstRead(false);
-        setBaseOrientation(getRawOrientation(event));
-      }
+      // if (firstRead) {
+      //   setFirstRead(false);
+      //   setBaseOrientation(getRawOrientation(event));
+      // }
 
-      const bo = firstRead ? getRawOrientation(event) : baseOrientation;
-      setOrientation(getOrientationObject(event, bo));
+      // const bo = firstRead ? getRawOrientation(event) : baseOrientation;
+      setOrientation(getOrientationObject(event));
     };
 
     window.addEventListener("deviceorientation", handleOrientation);
