@@ -11,6 +11,7 @@ import { useOrientation } from "./hooks";
 function App() {
   const [card, setCard] = useState("amelia");
   const { orientation } = useOrientation();
+  const debugMode = false;
 
   const previous = () => {
     setCard(card === "amelia" ? "ganyu" : "amelia");
@@ -120,11 +121,11 @@ function App() {
             </a>
           </div>
         </div>
-        <div className="debug">
+        {debugMode && (<div className="debug">
           <div>Gamma: {orientation.relative.gamma}</div>
           <div>Beta: {orientation.relative.beta}</div>
           <div>Alpha {orientation.relative.alpha}</div>
-        </div>
+        </div>)}
       </aside>
     </>
   );
